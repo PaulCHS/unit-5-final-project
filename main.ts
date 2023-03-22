@@ -6,6 +6,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
         info.player2.changeScoreBy(2)
     }
 })
+let allCollectibles = sprites.allOfKind(SpriteKind.Player)
+while (allCollectibles.length < 20) {
+    createCollectibles()
+}
 let thingies: Sprite = null
 let player1: Sprite = null
 tiles.setCurrentTilemap(tilemap`level1`)
@@ -142,17 +146,20 @@ let collectibles = [img`
     ......8768......
     `]
 scene.cameraFollowSprite(player1)
-for (let index = 0; index < 100; index++) {
-    thingies = sprites.create(collectibles[randint(0, 2)], SpriteKind.Projectile)
-    thingies.x = randint(25, 235)
-    thingies.y = randint(25, 220)
+function createCollectibles() {
+    for (let index = 0; index < 100; index++) {
+        thingies = sprites.create(collectibles[randint(0, 2)], SpriteKind.Projectile)
+        thingies.x = randint(25, 235)
+        thingies.y = randint(25, 220)
+    }
 }
+createCollectibles()
 forever(function () {
     player1.vx = randint(-1000, 1000)
     player1.vy = randint(-1000, 1000)
     player2.vx = randint(-1000, 1000)
     player2.vy = randint(-1000, 1000)
 })
-mp.onScore(100, function(winner: mp.Player) {  
+mp.onScore(200, function(winner: mp.Player) {  
     mp.gameOverPlayerWin(winner)
 })
