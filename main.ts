@@ -1,3 +1,4 @@
+//This function creates all of the things that increase the players' score.
 function createCollectibles () {
     for (let index = 0; index < 100; index++) {
         thingies = sprites.create(collectibles[randint(0, 2)], SpriteKind.Projectile)
@@ -5,6 +6,7 @@ function createCollectibles () {
         thingies.y = randint(25, 220)
     }
 }
+//This gives the players points for picking up the collectibles.
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
     if (sprite == player1) {
@@ -13,12 +15,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
         info.player2.changeScoreBy(5)
     }
 })
+//When a player reaches 1000 points, they win.
 mp.onScore(1000, function (winner) {
     mp.gameOverPlayerWin(winner)
 })
 let thingies: Sprite = null
-let player1: Sprite = null
 let collectibles: Image[] = []
+//These are the 3 collectibles.
 collectibles = [img`
     . . 2 2 b b b b b . . . . . . . 
     . 2 b 4 4 4 4 4 4 b . . . . . . 
@@ -97,7 +100,8 @@ collectibles = [img`
     `]
 createCollectibles()
 tiles.setCurrentTilemap(tilemap`level1`)
-player1 = sprites.create(img`
+//These create the players.
+let player1 = sprites.create(img`
     ........................
     ........................
     ........................
@@ -153,7 +157,9 @@ player1.setStayInScreen(true)
 player2.setStayInScreen(true)
 controller.player1.moveSprite(player1)
 controller.player2.moveSprite(player2)
+//The camera only follows player 1 because I don't know how to do anything else.
 scene.cameraFollowSprite(player1)
+//This runs forever; it moves the players randomly(ish) and creates more collectibles once they start to run out.
 forever(function () {
     let allCollectibles = sprites.allOfKind(SpriteKind.Projectile)
     player1.vx = randint(-1000, 1000)
