@@ -1,9 +1,9 @@
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
     if (sprite == player1) {
-        info.player1.changeScoreBy(1)
+        info.player1.changeScoreBy(2)
     } else {
-        info.player2.changeScoreBy(1)
+        info.player2.changeScoreBy(2)
     }
 })
 let thingies: Sprite = null
@@ -152,4 +152,7 @@ forever(function () {
     player1.vy = randint(-1000, 1000)
     player2.vx = randint(-1000, 1000)
     player2.vy = randint(-1000, 1000)
+})
+mp.onScore(100, function(winner: mp.Player) {  
+    mp.gameOverPlayerWin(winner)
 })

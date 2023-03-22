@@ -2,7 +2,8 @@
     "name": "Unit 5 Final Project",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "multiplayer": "*"
     },
     "files": [
         "main.blocks",
