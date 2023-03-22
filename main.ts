@@ -1,10 +1,11 @@
 // This function creates all of the things that increase the players' score.
-function createCollectibles () {
-    for (let index = 0; index < 100; index++) {
+function createCollectibles (howMany: number) {
+    for (let index = 0; index < howMany; index++) {
         thingies = sprites.create(collectibles[randint(0, 2)], SpriteKind.Projectile)
         thingies.x = randint(25, 235)
         thingies.y = randint(25, 220)
     }
+    return howMany
 }
 // When a player reaches 1000 points, they win.
 mp.onScore(1000, function (winner) {
@@ -100,7 +101,7 @@ collectibles = [img`
     .....87678......
     ......8768......
     `]
-createCollectibles()
+createCollectibles(100)
 tiles.setCurrentTilemap(tilemap`level1`)
 // These create the players.
 player1 = sprites.create(img`
@@ -169,6 +170,6 @@ forever(function () {
     player2.vx = randint(-1000, 1000)
     player2.vy = randint(-1000, 1000)
     if (allCollectibles.length < 20) {
-        createCollectibles()
+        createCollectibles(randint(50,150))
     }
 })
