@@ -142,14 +142,14 @@ let collectibles = [img`
     ......8768......
     `]
 scene.cameraFollowSprite(player1)
-for (let index = 0; index < 20; index++) {
+for (let index = 0; index < 100; index++) {
     thingies = sprites.create(collectibles[randint(0, 2)], SpriteKind.Projectile)
-    thingies.x = randint(25, 130)
-    thingies.y = randint(25, 90)
+    thingies.x = randint(25, 235)
+    thingies.y = randint(25, 220)
 }
 forever(function () {
-    player1.vx = randint(-300, 300)
-    player1.vy = randint(-300, 300)
-    player2.vx = randint(-300, 300)
-    player2.vy = randint(-300, 300)
+    player1.vx = randint(-1000, 1000)
+    player1.vy = randint(-1000, 1000)
+    player2.vx = randint(-1000, 1000)
+    player2.vy = randint(-1000, 1000)
 })
